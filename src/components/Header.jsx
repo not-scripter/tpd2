@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Logo, Button, ImgBox } from "../components";
+import { Logo, Button } from "../components";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CrossSvg, MenuSvg, defaultAvatar } from "../assets";
@@ -36,9 +36,9 @@ export default function Header() {
             "w-8 h-8 rounded-full object-cover"
           ].join(" ")
           }>
-            <ImgBox
-              className=""
-              src={profileData.avatar ? PostServices.getFilePreview(profileData.avatar) : defaultAvatar}
+            <img
+              className="w-8 h-8 bg-cover rounded-full shadow-md shadow-secondary/50"
+              src={profileData.avatar ? PostServices.getAvatarPreview(profileData.avatar) : defaultAvatar}
             />
           </NavLink>
         }
