@@ -44,16 +44,18 @@ export default function Header() {
   return (
     <header className="flex flex-col z-30">
       <section className="relative w-full flex items-center justify-between bg-primary text-secondary px-4 py-2">
-        <NavLink to={`/${profileData?.username}`} className={({isActive}) => [
-          isActive && "shadow-secondary shadow-md",
-          "w-8 h-8 rounded-full object-cover"
-        ].join(" ")
-        }>
-        <ImgBox
-          className=""
-          src={profileData?.avatar ? profileData.avatar : defaultAvatar}
-        />
-        </NavLink>
+        { authStatus && 
+          <NavLink to={`/${profileData?.username}`} className={({isActive}) => [
+            isActive && "shadow-secondary shadow-md",
+            "w-8 h-8 rounded-full object-cover"
+          ].join(" ")
+          }>
+            <ImgBox
+              className=""
+              src={profileData?.avatar ? profileData.avatar : defaultAvatar}
+            />
+          </NavLink>
+        }
         <Logo className="z-30" />
         <Button
           onClick={() => setmobNav((prev) => !prev)}

@@ -30,7 +30,7 @@ export default function App() {
 
   return !loading ? (
     <main className="min-h-dvh flex flex-col bg-zinc-900 text-white">
-      {authStatus && <Header />}
+      <Header />
       <Outlet />
       {/* <Footer /> */}
       {authStatus && <Toolbar />}
