@@ -64,7 +64,7 @@ export default function DocForm({ user, post, reply, typePost=false, typeReply=f
           }
         }
       } else { 
-        const newPost = await PostServices.createDoc({
+        const newPost = await PostServices.createPost({
           ...data,
           userId: profileData.$id,
           images: file ? file.$id : null,
