@@ -30,7 +30,7 @@ export default function Signup() {
       ...data
     });
     if (account) {
-      const userData = await AuthServices.getCurrentUser().then(res => JSON.parse(res));
+      const userData = await AuthServices.getCurrentUser();
       if (userData) {
         const profileData = await PostServices.createProfile({
           userId: userData.$id,
@@ -38,7 +38,7 @@ export default function Signup() {
           username: userData.name,
           email: userData.email,
           joined: handleIso(userData.$createdAt),
-        }).then(res => JSON.parse(res));
+        });
         if (userData && profileData) {
           dispatch(login({ userData, profileData }));
           toast.success("Account Created Successfull");

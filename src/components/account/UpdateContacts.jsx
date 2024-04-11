@@ -29,7 +29,6 @@ export default function UpdateContacts() {
       const phoneRes = await AuthServices.updatePhone(data) 
       if (phoneRes) {
         const emailRes = await AuthServices.updateEmail(data)
-          .then((res) => JSON.parse(res))
         if (phoneRes && emailRes) {
           dispatch(login({userData: emailRes}))
           toast.success("Contact Details Updated");
@@ -41,7 +40,6 @@ export default function UpdateContacts() {
     } else {
       if (data.phone !== userData.phone) {
         const phoneRes = await AuthServices.updatePhone(data) 
-          .then((res) => JSON.parse(res))
         if (phoneRes) {
           dispatch(login({userData: phoneRes}))
           toast.success("Phone Updated");
@@ -52,7 +50,6 @@ export default function UpdateContacts() {
       }
       if (data.email !== userData.email) {
         const emailRes = await AuthServices.updateEmail(data)
-          .then((res) => JSON.parse(res))
         if (emailRes) {
           dispatch(login({userData: emailRes}))
           toast.success("Email Updated");

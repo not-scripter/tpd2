@@ -22,7 +22,6 @@ export default function DeleteAccount() {
           const posRes = myPosts.documents.map((item) =>
             PostServices.deletePost(item.$id),
           );
-          console.log(posRes);
           if (posRes) {
             dispatch(logout());
             toast.success("Account Deleted");
