@@ -9,28 +9,27 @@ import { login } from "../../store/AuthSlice";
 
 export default function ResetPassword() {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
+
   const { handleSubmit, register, setValue, reset } = useForm({
     defaultValues: {
       password: null,
       newPassword: null,
-    }
+    },
   });
   const [editable, seteditable] = useState(false);
   const [open, setopen] = useState(false);
 
   const updatePassword = async (data) => {
-    AuthServices.updatePassword(data)
-      .then((authRes) => {
-        dispatch(login({userData: authRes}))
-        toast.success("Password Updated");
-        seteditable(false);
-        setopen(false);
-      })
-      .catch(() => {
-        toast.error("Password Incorrect");
-      });
+    const userData = await AuthServices.updatePassword(data)
+      .then((res) => JSON.parse(res))
+      .catch(() => toast.error("Password Incorrect"));
+    if (userData) {
+      dispatch(login({ userData: authRes }));
+      toast.success("Password Updated");
+      seteditable(false);
+      setopen(false);
+    }
   };
   return (
     <form onSubmit={handleSubmit(updatePassword)}>
@@ -46,7 +45,10 @@ export default function ResetPassword() {
           {editable ? (
             <>
               <Button
-                onClick={() => {seteditable(false); reset(defaultValues)}}
+                onClick={() => {
+                  seteditable(false);
+                  reset(defaultValues);
+                }}
                 className="w-full py-2"
               >
                 Cancel

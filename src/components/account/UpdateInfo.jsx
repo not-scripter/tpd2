@@ -40,7 +40,7 @@ export default function UpdateInfo() {
     const banner = data.banner[0] && await PostServices.uploadBanner(data.banner[0]);
     avatar && profileData.avatar && PostServices.deleteAvatar(profileData.avatar);
     banner && profileData.banner && PostServices.deleteBanner(profileData.banner);
-    const authRes = data.username && await AuthServices.updateName(data.username)
+    const authRes = data.username && await AuthServices.updateName(data.username).then((res) => JSON.parse(res))
     const proRes = await PostServices.updateProfile({
       userId: userData?.$id,
       avatar: avatar ? avatar.$id : profileData.avatar,
@@ -51,7 +51,7 @@ export default function UpdateInfo() {
       website: data.website,
       location: data.location,
       visibility: data.visibility,
-    })
+    }).then((res) => JSON.parse(res))
     if (proRes) {
       dispatch(login({ userData: authRes ? authRes : userData, profileData: proRes }));
       reset(defaultValues)
