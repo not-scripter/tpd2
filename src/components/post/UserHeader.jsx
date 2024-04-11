@@ -51,6 +51,7 @@ export default function UserHeader({user, post, reply, giveActions=false, replyT
         userId: profileData.$id,
         posts: profileData.posts.filter((item) => item !== res.$id),
       }))
+      .then(async () => await PostServices.deleteReplies(post.$id))
       .then(() => {
         toast.success(`Post Deleted`)
         setbtnLoading(false)
@@ -69,6 +70,7 @@ export default function UserHeader({user, post, reply, giveActions=false, replyT
         userId: profileData.$id,
         replies: profileData.replies.filter((item) => item !== reply.$id),
       }))
+      .then(async () => await PostServices.deleteReplies(reply.$id))
       .then(() => {
         toast.success(`Reply Deleted`)
         setbtnLoading(false)
