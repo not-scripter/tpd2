@@ -50,22 +50,24 @@ export default function UserHeader({user, post, reply, giveActions=false, replyT
     })
     if (docRes) {
     doc.images && await PostServices.deleteFile(doc.images);
-      if (reply.replyToType === "post") {
+      if (post) {
+        await PostServices.deletePost(post.$id).then(async () => 
         await PostServices.updatePost({
         postId: replyToDoc?.$id,
         replies: [...replyToDoc.replies.filter(item => item !== post?.$id)]
       }).then(async (res) => await PostServices.updateProfile({
         userId: profileData.$id,
         posts: profileData?.posts.filter((item) => item !== res.$id),
-      }))
-      } else if (reply.replyToType === "reply") {
+      })))
+      } else if (reply) {
+        await PostServices.deleteReply(reply.$id).then(async () => 
         await PostServices.updateReply({
           replyId: replyToDoc?.$id,
           replies: [...replyToDoc.replies.filter(item => item !== reply?.$id)]
       }).then(async (res) => await PostServices.updateProfile({
         userId: profileData.$id,
         replies: profileData?.replies.filter((item) => item !== res.$id),
-      }))
+      })))
       }
       if (proRes) {
         toast.success(`${docType} Deleted`)
