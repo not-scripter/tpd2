@@ -1,17 +1,14 @@
 import React from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   AddSvg,
   HomeSvg,
-  PeoplesSvg,
   PostSvg,
   ReplySvg,
   SavesSvg,
 } from "../assets";
-import { useSelector } from "react-redux";
 
 export default function Toolbar() {
-  const { profileData } = useSelector((state) => state.auth);
   const ToolItems = [
     {
       slug: "/",
