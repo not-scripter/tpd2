@@ -54,12 +54,18 @@ export default function UserHeader({user, post, reply, giveActions=false, replyT
         await PostServices.updatePost({
         postId: replyToDoc?.$id,
         replies: [...replyToDoc.replies.filter(item => item !== post?.$id)]
-      })
+      }).then(async (res) => await PostServices.updateProfile({
+        userId: profileData.$id,
+        posts: profileData?.posts.filter((item) => item !== res.$id),
+      }))
       } else if (reply.replyToType === "reply") {
         await PostServices.updateReply({
           replyId: replyToDoc?.$id,
           replies: [...replyToDoc.replies.filter(item => item !== reply?.$id)]
-        })
+      }).then(async (res) => await PostServices.updateProfile({
+        userId: profileData.$id,
+        replies: profileData?.replies.filter((item) => item !== res.$id),
+      }))
       }
       const proRes = await PostServices.updateProfile({
         userId: profileData.$id,
