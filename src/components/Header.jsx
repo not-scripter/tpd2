@@ -3,6 +3,7 @@ import { Logo, Button, ImgBox } from "../components";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CrossSvg, MenuSvg, defaultAvatar } from "../assets";
+import { PostServices } from "../appwrite";
 
 export default function Header() {
   const { authStatus, profileData } = useSelector((state) => state.auth);
@@ -16,21 +17,6 @@ export default function Header() {
       name: "Signup",
       slug: "/Signup",
       active: !authStatus,
-    },
-    {
-      name: "Home",
-      slug: "/",
-      active: authStatus,
-    },
-    {
-      name: "My Posts",
-      slug: "/my-posts",
-      active: authStatus,
-    },
-    {
-      name: "Add Post",
-      slug: "/add-post",
-      active: authStatus,
     },
     {
       name: "Account",
@@ -52,7 +38,7 @@ export default function Header() {
           }>
             <ImgBox
               className=""
-              src={profileData?.avatar ? profileData.avatar : defaultAvatar}
+              src={profileData?.avatar ? PostServices.getFilePreview(profileData.avatar) : defaultAvatar}
             />
           </NavLink>
         }
