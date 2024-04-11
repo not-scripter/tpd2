@@ -17,9 +17,9 @@ export default function Login() {
     setloading(true);
     const account = await AuthServices.login(data);
     if (account) {
-      const userData = await AuthServices.getCurrentUser();
+      const userData = await AuthServices.getCurrentUser().then(res => JSON.parse(res));
       if (userData) {
-        const profileData = await PostServices.getProfile(userData.$id);
+        const profileData = await PostServices.getProfile(userData.$id).then(res => JSON.parse(res));
         if (userData && profileData) {
           toast.success("Login Sucsessful");
           dispatch(login({ userData, profileData }));
