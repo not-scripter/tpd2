@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Logo, Button, ImgBox } from "../components";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CrossSvg, MenuSvg, defaultAvatar } from "../assets";
 import { PostServices } from "../appwrite";
@@ -38,7 +38,7 @@ export default function Header() {
           }>
             <ImgBox
               className=""
-              src={profileData?.avatar ? PostServices.getFilePreview(profileData.avatar) : defaultAvatar}
+              src={profileData.avatar ? PostServices.getFilePreview(profileData.avatar) : defaultAvatar}
             />
           </NavLink>
         }
