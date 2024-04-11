@@ -72,7 +72,7 @@ export default function DocForm({ user, post, reply, typePost=false, typeReply=f
         if (newPost) {
           const proRes = await PostServices.updateProfile({
           userId: profileData.$id,
-          posts: [...profileData.posts, res.$id],
+          posts: [...profileData.posts, newPost.$id],
         })
         if (newPost && proRes) {
           toast.success(`Post Created`);
