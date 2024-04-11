@@ -54,7 +54,7 @@ export default function Toolbar() {
             }
           >
             {item.icon}
-            <h1 className="text-sm font-semibold text-secondary/50">
+            <h1 className="text-xs font-semibold text-secondary/50">
               {item.name}
             </h1>
           </NavLink>
