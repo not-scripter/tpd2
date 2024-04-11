@@ -67,10 +67,6 @@ export default function UserHeader({user, post, reply, giveActions=false, replyT
         replies: profileData?.replies.filter((item) => item !== res.$id),
       }))
       }
-      const proRes = await PostServices.updateProfile({
-        userId: profileData.$id,
-        [docsType]: profileData?.[docsType].filter((item) => item !== doc?.$id),
-      })
       if (proRes) {
         toast.success(`${docType} Deleted`)
         setbtnLoading(false)
